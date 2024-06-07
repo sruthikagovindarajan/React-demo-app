@@ -3,6 +3,12 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [text, setText] = useState('');
+  const fruitNames = [
+    'Apple', 'Banana', 'Cherry', 'Date', 'Elderberry',
+    'Fig', 'Grape', 'Honeydew', 'Kiwi', 'Lemon',
+    'Mango', 'Nectarine', 'Orange', 'Papaya', 'Quince',
+    'Raspberry', 'Strawberry', 'Tangerine', 'Ugli fruit', 'Watermelon'
+  ];
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -47,6 +53,15 @@ function App() {
       <div>
         <p>{text.toUpperCase()}</p>
       </div>
+
+      <div>
+      <h1>Fruit List</h1>
+      <ul>
+        {fruitNames.map((fruit, index) => (
+          <li key={index}>{fruit}</li>
+        ))}
+      </ul>
+    </div>
     </div>
   );
 }
