@@ -71,19 +71,33 @@ function App() {
       <div>
         <div className="dropdown">
           <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown button
+            Sorting
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a className="dropdown-item" href="#" onClick={() => handleSort('asc')}>Ascending</a></li>
             <li><a className="dropdown-item" href="#" onClick={() => handleSort('desc')}>Descending</a></li>
           </ul>
         </div>
-        <h1>Fruit List</h1>
-        <ul>
-          {sortedFruitNames.map((fruit, index) => (
-            <li key={index}>{fruit}</li>
-          ))}
-        </ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                <h1>Fruit List</h1>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <ul>
+                  {sortedFruitNames.map((fruit, index) => (
+                    <li key={index}>{fruit}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
