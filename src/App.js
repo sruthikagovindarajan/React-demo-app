@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [text, setText] = useState('');
+  const [sortOrder, setSortOrder] = useState('none');
   const fruitNames = [
     'Apple', 'Banana', 'Cherry', 'Date', 'Elderberry',
     'Fig', 'Grape', 'Honeydew', 'Kiwi', 'Lemon',
@@ -14,11 +15,14 @@ function App() {
     setText(event.target.value);
   };
 
+  const handleSort = (order) => {
+    setSortOrder(order);
+  };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.keyCode === 123) { // F12 key
         event.preventDefault();
-
         alert("F12 is disabled");
         return false;
       }
@@ -38,6 +42,16 @@ function App() {
     };
   }, []);
 
+  const sortedFruitNames = [...fruitNames].sort((a, b) => {
+    if (sortOrder === 'asc') {
+      return a.length - b.length || a.localeCompare(b);
+    }
+    else if (sortOrder === 'desc') {
+      return b.length - a.length || b.localeCompare(a);
+    }
+    return 0;
+  });
+
   return (
     <div className="App">
       <div className="mb-3">
@@ -55,13 +69,22 @@ function App() {
       </div>
 
       <div>
-      <h1>Fruit List</h1>
-      <ul>
-        {fruitNames.map((fruit, index) => (
-          <li key={index}>{fruit}</li>
-        ))}
-      </ul>
-    </div>
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a className="dropdown-item" href="#" onClick={() => handleSort('asc')}>Ascending</a></li>
+            <li><a className="dropdown-item" href="#" onClick={() => handleSort('desc')}>Descending</a></li>
+          </ul>
+        </div>
+        <h1>Fruit List</h1>
+        <ul>
+          {sortedFruitNames.map((fruit, index) => (
+            <li key={index}>{fruit}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
